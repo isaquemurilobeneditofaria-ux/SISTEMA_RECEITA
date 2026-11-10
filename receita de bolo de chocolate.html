@@ -1,381 +1,387 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receita Bolo Chocolate</title>
+    <title>Sabor & Arte - Seu Portal de Receitas</title>
     <!-- Favicon de Bolo -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🍰</text></svg>">
+    
     <style>
-        :root {
-            --primary-color: #4a2c11;
-            --secondary-color: #7c5335;
-            --accent-color: #d2b48c;
-            --background-color: #fcf8f2;
-            --text-color: #333;
-            --card-bg: #fff;
-            --border-color: #ddd;
-            --dicas-bg: #fdf6ec;
-            --dicas-border: #e6a23c;
-            --dicas-text: #b88230;
+        /* --- RESET E VARIÁVEIS --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Configurações do Modo Escuro */
-        [data-theme="dark"] {
-            --primary-color: #1a0f05;
-            --secondary-color: #d2b48c;
-            --accent-color: #7c5335;
-            --background-color: #121212;
-            --text-color: #f0f0f0;
-            --card-bg: #1e1e1e;
-            --border-color: #444;
-            --dicas-bg: #2a2015;
-            --dicas-border: #7c5335;
-            --dicas-text: #f0dcc0;
+        :root {
+            --cor-primaria: #482e21; /* Marrom Profundo */
+            --cor-secundaria: #ff7a00; /* Laranja Cenoura */
+            --cor-fundo: #fdfaf7; /* Off-White Confortável */
+            --cor-texto: #25130A;
+            --cor-card: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-            scroll-behavior: smooth;
+            padding-top: 80px; /* Evita que o menu fixo cubra os elementos */
         }
 
-        /* Menu de Navegação */
+        /* --- HEADER E NAVEGAÇÃO --- */
         header.main-header {
-            background-color: var(--primary-color);
-            padding: 15px 20px;
-            position: sticky;
+            background: var(--cor-primaria);
+            padding: 15px 30px;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: background-color 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .nav-container {
-            max-width: 1000px;
+        .header-container {
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .logo {
-            color: #fff;
-            margin: 0;
-            font-size: 1.5em;
+        .header-logo {
+            color: #ffffff;
+            font-size: 24px;
+            text-decoration: none;
             font-weight: bold;
+            letter-spacing: 1px;
         }
 
-        .logo span {
-            color: var(--accent-color);
+        .header-logo span {
+            color: var(--cor-secundaria);
         }
 
-        .nav-right {
+        /* Barra de Busca */
+        .search-container {
             display: flex;
             align-items: center;
-            gap: 20px;
-        }
-
-        .nav-menu {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-menu a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1em;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-        /* Efeito Hover do Menu */
-        .nav-menu a:hover {
-            color: var(--primary-color);
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        /* Botão do Tema */
-        .theme-toggle {
-            background: none;
-            border: 1px solid #fff;
-            color: #fff;
-            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 15px;
             border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 280px;
             transition: all 0.3s;
         }
 
-        .theme-toggle:hover {
-            background-color: #fff;
-            color: var(--primary-color);
+        .search-container:focus-within {
+            background: rgba(255, 255, 255, 0.2);
+            width: 320px;
         }
 
-        /* Área de Conteúdo */
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: var(--card-bg);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
-
-        h1 {
-            color: var(--secondary-color);
-            text-align: center;
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-top: 10px;
-        }
-
-        h2 {
-            color: var(--secondary-color);
-            margin-top: 40px;
-            border-left: 5px solid var(--secondary-color);
-            padding-left: 10px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: var(--card-bg);
-        }
-
-        th {
-            background-color: var(--primary-color);
+        .search-container input {
+            background: transparent;
+            border: none;
+            outline: none;
             color: white;
-            padding: 12px;
-            text-transform: uppercase;
-            font-size: 0.9em;
+            width: 100%;
+            font-size: 14px;
         }
 
-        td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            font-weight: bold;
+        .search-container input::placeholder {
+            color: #ccc;
         }
 
-        /* Painel da Calculadora */
-        .calc-box {
+        .search-container button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Links do Menu */
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu a:hover {
+            color: var(--cor-secundaria);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--cor-secundaria);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* --- HERO SELECTION (DESTAQUE) --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://unsplash.com') no-repeat center center/cover;
+            height: 350px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .calc-box input {
-            width: 60px;
-            padding: 5px;
             text-align: center;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background: var(--card-bg);
-            color: var(--text-color);
-            font-weight: bold;
+            color: white;
+            padding: 20px;
+            margin-bottom: 3rem;
+            border-radius: 0 0 20px 20px;
         }
 
-        .media-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin: 25px 0;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-
-        iframe {
-            border-radius: 8px;
-            border: none;
-            max-width: 100%;
-        }
-
-        ul, ol {
-            padding-left: 20px;
-        }
-
-        li {
+        .hero-content h2 {
+            font-size: 38px;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
         }
 
-        .font-medium {
-            font-weight: 600;
-            color: var(--secondary-color);
+        .hero-content p {
+            font-size: 18px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
         }
 
-        /* Bloco de Dicas */
-        .dicas-box {
-            background-color: var(--dicas-bg);
-            border: 1px dashed var(--dicas-border);
-            padding: 15px;
+        /* --- CONTEÚDO PRINCIPAL --- */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            color: var(--cor-primaria);
+            font-size: 28px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: var(--cor-secundaria);
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        /* Grid de Cards de Receita */
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1xl));
+            gap: 30px;
+            margin-bottom: 4rem;
+        }
+
+        .recipe-card {
+            background: var(--cor-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-image-box {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .recipe-card:hover .card-image-box img {
+            transform: scale(1.08);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--cor-secundaria);
+            color: white;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-body h3 {
+            color: var(--cor-primaria);
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .card-body p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .btn-card {
+            display: inline-block;
+            background: var(--cor-primaria);
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
             border-radius: 6px;
-            margin-top: 30px;
+            transition: background 0.3s;
         }
 
-        .dicas-box h3 {
-            margin-top: 0;
-            color: var(--dicas-text);
+        .btn-card:hover {
+            background: var(--cor-secundaria);
         }
 
-        .agradecimento {
-            text-align: center;
-            font-style: italic;
-            margin: 40px 0 20px;
-            font-size: 1.1em;
-            color: var(--secondary-color);
-        }
-
-        /* Rodapé e Formulário */
-        footer.custom-footer {
-            background-color: var(--primary-color);
+        /* --- RODAPÉ --- */
+        .custom-footer {
+            background-color: #25130A;
             color: #fff;
-            padding: 40px 20px 20px;
-            margin-top: 50px;
+            padding: 3rem 20px 1.5rem;
+            margin-top: 4rem;
         }
 
         .footer-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            gap: 40px;
+            gap: 4rem;
         }
 
         .footer-column {
             flex: 1;
-            min-width: 280px;
+            min-width: 250px;
+        }
+
+        .footer-logo {
+            color: var(--cor-secundaria);
+            margin-bottom: 1rem;
+            font-size: 24px;
         }
 
         .footer-logo span {
-            color: var(--accent-color);
+            color: #fff;
+        }
+
+        .footer-column p {
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 1.2rem;
+            color: #fff;
         }
 
         .footer-column ul {
             list-style: none;
-            padding: 0;
         }
 
-        .footer-column li {
-            margin-bottom: 8px;
-            font-size: 0.9em;
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
         }
 
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 15px;
+        .footer-column a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .form-group label {
-            font-size: 0.9em;
-            font-weight: 600;
-        }
-
-        .form-group input, .form-group textarea {
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-family: inherit;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-        }
-
-        .btn-submit {
-            background-color: var(--secondary-color);
-            color: var(--background-color);
-            border: none;
-            padding: 12px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-
-        .success-message {
-            display: none;
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 4px;
-            margin-top: 15px;
-            border: 1px solid #c3e6cb;
-            text-align: center;
-            font-weight: bold;
+        .footer-column a:hover {
+            color: var(--cor-secundaria);
         }
 
         .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid #482e21;
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.85em;
+            font-size: 0.9rem;
+            color: #888;
         }
 
-        @media (max-width: 700px) {
-            .nav-container {
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            .header-container {
                 flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .search-container {
+                width: 100%;
+            }
+            .search-container:focus-within {
+                width: 100%;
+            }
+            .nav-menu ul {
                 gap: 15px;
+            }
+            .hero h2 {
+                font-size: 28px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Menu Superior -->
+    <!-- MENU DE NAVEGAÇÃO SUPERIOR -->
     <header class="main-header">
-        <nav class="nav-container">
-            <p class="logo">Minha<span>Receita</span></p>
-            <div class="nav-right">
-                <ul class="nav-menu">
-                    <li><a href="#inicio">Início</a></li>
-                    <li><a href="#ingredientes">Ingredientes</a></li>
-                    <li><a href="#preparo">Preparo</a></li>
-                    <li><a href="#dicas">Dicas</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-                <button class="theme-toggle" id="themeToggle">Mudar Tema</button>
-            </div>
-        </nav>
-    </header>
+        <div class="header-container">
+            <a href="#" class="header-logo">Sabor<span>&Arte</span></a>
+            
+            <!-- Barra de Pesquisa Dinâmica -->
+
 
