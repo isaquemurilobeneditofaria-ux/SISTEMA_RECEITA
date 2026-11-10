@@ -3,35 +3,379 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receita de Bolo de Chocolate</title>
-    </head>
-<body>
-    <div class="container">
-    
-        <h1>Bolo de Morango</h1>
-        
-        <img class="recipe-image" src="c:\xampp\img\images (1).jfif" alt="Bolo de Morango" width="600">
-   
-        <h2>Ingredientes</h2>
-        
-        <h3>Massa</h3>
-        <ul>
-            <li><strong>Ovos:</strong> 4 unidades</li>
-            <li><strong>Manteiga:</strong> 1 colher (sopa)</li>
-            <li><strong>Leite:</strong> 1 xícara</li>
-            <li><strong>Açúcar:</strong> 2 xícaras</li>
-            <li><strong>Farinha de Trigo:</strong> 2 xícaras</li>
-            <li><strong>Fermento em Pó:</strong> 1 e 1/2 colher (sopa)</li>
-       
-        </ul>
+    <title>Receita Bolo Chocolate</title>
+    <!-- Favicon de Bolo -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🍰</text></svg>">
+    <style>
+        :root {
+            --primary-color: #4a2c11;
+            --secondary-color: #7c5335;
+            --accent-color: #d2b48c;
+            --background-color: #fcf8f2;
+            --text-color: #333;
+            --card-bg: #fff;
+            --border-color: #ddd;
+            --dicas-bg: #fdf6ec;
+            --dicas-border: #e6a23c;
+            --dicas-text: #b88230;
+        }
 
-        <h2>Modo de Preparo</h2>
-        <ol>
-            <li><strong>Preparo da Massa:</strong> No liquidificador ou batedeira, bata os ovos, o açúcar e a manteiga. Adicione o leite aos poucos alternando com a farinha. Adicione o fermento por último, mexendo devagar. Asse em forno preaquecido a 180°C por 40 minutos.</li>
-            <li><strong>Preparo do Recheio:</strong> Dissolva o amido no leite, junte o leite condensado e a gelatina. Cozinhe em fogo médio mexendo até engrossar. Deixe esfriar antes de juntar com os morangos picados.</li>
-            <li><strong>Preparo da Cobertura:</strong> Cozinhe a manteiga, leite condensado e chocolate em pó em fogo baixo até ponto de brigadeiro mole. Desligue e misture o creme de leite.</li>
-            <li><strong>Montagem:</strong> Corte o bolo ao meio, regue com guaraná, adicione o recheio de creme com os morangos picados, feche o bolo, espalhe o brigadeiro cremoso por fora e decore com morangos e granulado.</li>
-        </ol>
-    </div>
-</body>
-</html>
+        /* Configurações do Modo Escuro */
+        [data-theme="dark"] {
+            --primary-color: #1a0f05;
+            --secondary-color: #d2b48c;
+            --accent-color: #7c5335;
+            --background-color: #121212;
+            --text-color: #f0f0f0;
+            --card-bg: #1e1e1e;
+            --border-color: #444;
+            --dicas-bg: #2a2015;
+            --dicas-border: #7c5335;
+            --dicas-text: #f0dcc0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            scroll-behavior: smooth;
+        }
+
+        /* Menu de Navegação */
+        header.main-header {
+            background-color: var(--primary-color);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            color: #fff;
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1em;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* Efeito Hover do Menu */
+        .nav-menu a:hover {
+            color: var(--primary-color);
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Botão do Tema */
+        .theme-toggle {
+            background: none;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+        }
+
+        /* Área de Conteúdo */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: var(--card-bg);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 40px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--card-bg);
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            font-weight: bold;
+        }
+
+        /* Painel da Calculadora */
+        .calc-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .calc-box input {
+            width: 60px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        .media-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        iframe {
+            border-radius: 8px;
+            border: none;
+            max-width: 100%;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .font-medium {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        /* Bloco de Dicas */
+        .dicas-box {
+            background-color: var(--dicas-bg);
+            border: 1px dashed var(--dicas-border);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 30px;
+        }
+
+        .dicas-box h3 {
+            margin-top: 0;
+            color: var(--dicas-text);
+        }
+
+        .agradecimento {
+            text-align: center;
+            font-style: italic;
+            margin: 40px 0 20px;
+            font-size: 1.1em;
+            color: var(--secondary-color);
+        }
+
+        /* Rodapé e Formulário */
+        footer.custom-footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .btn-submit {
+            background-color: var(--secondary-color);
+            color: var(--background-color);
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            border: 1px solid #c3e6cb;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 700px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menu Superior -->
+    <header class="main-header">
+        <nav class="nav-container">
+            <p class="logo">Minha<span>Receita</span></p>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#ingredientes">Ingredientes</a></li>
+                    <li><a href="#preparo">Preparo</a></li>
+                    <li><a href="#dicas">Dicas</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle">Mudar Tema</button>
+            </div>
+        </nav>
+    </header>
+
