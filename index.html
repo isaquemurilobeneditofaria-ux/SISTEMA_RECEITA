@@ -1,0 +1,387 @@
+   <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor & Arte - Seu Portal de Receitas</title>
+    <!-- Favicon de Bolo -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🍰</text></svg>">
+    
+    <style>
+        /* --- RESET E VARIÁVEIS --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --cor-primaria: #482e21; /* Marrom Profundo */
+            --cor-secundaria: #ff7a00; /* Laranja Cenoura */
+            --cor-fundo: #fdfaf7; /* Off-White Confortável */
+            --cor-texto: #25130A;
+            --cor-card: #ffffff;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            padding-top: 80px; /* Evita que o menu fixo cubra os elementos */
+        }
+
+        /* --- HEADER E NAVEGAÇÃO --- */
+        header.main-header {
+            background: var(--cor-primaria);
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-logo {
+            color: #ffffff;
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .header-logo span {
+            color: var(--cor-secundaria);
+        }
+
+        /* Barra de Busca */
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 280px;
+            transition: all 0.3s;
+        }
+
+        .search-container:focus-within {
+            background: rgba(255, 255, 255, 0.2);
+            width: 320px;
+        }
+
+        .search-container input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .search-container input::placeholder {
+            color: #ccc;
+        }
+
+        .search-container button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Links do Menu */
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.3s;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu a:hover {
+            color: var(--cor-secundaria);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--cor-secundaria);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* --- HERO SELECTION (DESTAQUE) --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://unsplash.com') no-repeat center center/cover;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-bottom: 3rem;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .hero-content h2 {
+            font-size: 38px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+
+        /* --- CONTEÚDO PRINCIPAL --- */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            color: var(--cor-primaria);
+            font-size: 28px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: var(--cor-secundaria);
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        /* Grid de Cards de Receita */
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1xl));
+            gap: 30px;
+            margin-bottom: 4rem;
+        }
+
+        .recipe-card {
+            background: var(--cor-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-image-box {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .recipe-card:hover .card-image-box img {
+            transform: scale(1.08);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--cor-secundaria);
+            color: white;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-body h3 {
+            color: var(--cor-primaria);
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .card-body p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .btn-card {
+            display: inline-block;
+            background: var(--cor-primaria);
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        .btn-card:hover {
+            background: var(--cor-secundaria);
+        }
+
+        /* --- RODAPÉ --- */
+        .custom-footer {
+            background-color: #25130A;
+            color: #fff;
+            padding: 3rem 20px 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-logo {
+            color: var(--cor-secundaria);
+            margin-bottom: 1rem;
+            font-size: 24px;
+        }
+
+        .footer-logo span {
+            color: #fff;
+        }
+
+        .footer-column p {
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 1.2rem;
+            color: #fff;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--cor-secundaria);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid #482e21;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .search-container {
+                width: 100%;
+            }
+            .search-container:focus-within {
+                width: 100%;
+            }
+            .nav-menu ul {
+                gap: 15px;
+            }
+            .hero h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENU DE NAVEGAÇÃO SUPERIOR -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="header-logo">Sabor<span>&Arte</span></a>
+            
+            <!-- Barra de Pesquisa Dinâmica -->
+
+
